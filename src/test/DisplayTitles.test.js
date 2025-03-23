@@ -1,10 +1,10 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import DisplayTitles from "../components/DisplayTitles";
+import SearchContainer from "../components/SearchContainer";
 
-describe("#DisplayTitles", () => {
+describe("#SearchContainer", () => {
   it("should render with values when title is provided", () => {
-    let displayTitle = {
+    let displayTitles = {
       inputQuery: null,
       query: "is your problems",
       onQueryChange: () => "is your",
@@ -12,13 +12,13 @@ describe("#DisplayTitles", () => {
       setTitle: () => "SampleTitle",
       display: true,
     };
-    const { container } = render(<DisplayTitles {...{ ...displayTitle }} />);
+    const { container } = render(<SearchContainer {...{ ...displayTitles }} />);
     expect(container.querySelector(".displayResults").textContent).toEqual(
       "SampleTitle"
     );
   });
   it("should render empty string when given no value", () => {
-    let displayTitle = {
+    let displayTitles = {
       inputQuery: null,
       query: "is your problems",
       onQueryChange: () => "is your",
@@ -26,11 +26,11 @@ describe("#DisplayTitles", () => {
       setTitle: () => "SampleTitle",
       display: true,
     };
-    const { container } = render(<DisplayTitles {...{ ...displayTitle }} />);
+    const { container } = render(<SearchContainer {...{ ...displayTitles }} />);
     expect(container.querySelector(".displayResults").textContent).toEqual("");
   });
   it("should render with multiple items when results has multiple items", () => {
-    let displayTitle = {
+    let displayTitles = {
       inputQuery: null,
       query: "is your problems",
       onQueryChange: () => "is your",
@@ -38,7 +38,7 @@ describe("#DisplayTitles", () => {
       setTitle: () => "SampleTitle",
       display: true,
     };
-    const { container } = render(<DisplayTitles {...{ ...displayTitle }} />);
+    const { container } = render(<SearchContainer {...{ ...displayTitles }} />);
     expect(container.querySelector(".displayResults").textContent).toEqual(
       "SampleTitle1SampleTitle2"
     );

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import DisplayTitles from "./DisplayTitles";
+import SearchContainer from "./SearchContainer";
 import SearchButton from "./SearchButton";
 import DisplayCards from "./DisplayCards";
 import Suggestions from "./Suggestions";
+import bookIcon from "../assets/book-icon.png";
 import { getTitles } from "../handlers/searchUtility";
 
 function SearchBooks() {
@@ -10,7 +11,7 @@ function SearchBooks() {
   const [suggestions, setSuggestions] = useState(10);
   const [results, setResults] = useState([]);
   const [display, setDisplay] = useState(true);
-  const [list, setList] = useState([]);
+  const [cards, setCards] = useState([]);
   const [item, setItem] = useState({});
   const inputQuery = useRef(null);
   let t1 = useRef();
@@ -45,12 +46,12 @@ function SearchBooks() {
   };
 
   let handleSubmit = () => {
-    let currentList = [...list];
+    let currentList = [...cards];
     let itemLength = Object.keys(item).length;
     const itemExists = !currentList.find((curr) => curr.title === item.title);
     if (itemExists && itemLength) {
       currentList.push(item);
-      setList(currentList);
+      setCards(currentList);
     } else {
       if (!itemLength) alert("No Books found");
       else alert("The book already exists in your list");
@@ -59,16 +60,19 @@ function SearchBooks() {
   };
 
   return (
-    <div className="SearchEngine">
-      <h1 className="pageTitle">Search Books</h1>
-      <div className="pageBody">
-        <DisplayTitles
+    <div className="search-books">
+      <div className="page-title">
+        <img src={bookIcon} alt="Book Icon" width="40" height="40" />
+        <h1 className="heading">Search Books</h1>
+      </div>
+      <div className="page-body">
+        <SearchContainer
           {...{ inputQuery, query, onQueryChange, results, setTitle, display }}
         />
         <SearchButton {...{ query, handleSubmit }} />
       </div>
       <Suggestions {...{ suggestions, onSuggestionsChange }} />
-      <DisplayCards {...{ list }} />
+      <DisplayCards {...{ cards }} />
     </div>
   );
 }

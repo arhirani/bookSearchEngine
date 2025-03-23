@@ -3,12 +3,12 @@ import React from "react";
 function Suggestions({ suggestions, onSuggestionsChange }) {
   return (
     <div className="suggestions">
-      <label>Suggestions : </label>
+      <h3>Suggestions : </h3>
       <input
         type="number"
+        className="suggestion-input"
         value={suggestions}
         onChange={onSuggestionsChange}
-        style={{ width: 50 }}
       />
     </div>
   );

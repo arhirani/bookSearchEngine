@@ -1,25 +1,17 @@
 import React from "react";
-import DisplayTitle from "./DisplayTitle";
 
-function DisplayTitles({
-  inputQuery,
-  query,
-  onQueryChange,
-  results,
-  setTitle,
-  display,
-}) {
+function DisplayTitles({ results, setTitle }) {
   return (
-    <div className="searchResults">
-      <input
-        type="text"
-        ref={inputQuery}
-        value={query}
-        className="searchInput"
-        onChange={onQueryChange}
-        placeholder="Let's Explore"
-      />
-      {display && results && <DisplayTitle {...{ results, setTitle }} />}
+    <div className="display-titles">
+      {results.map((result, index) => (
+        <div
+          onClick={() => setTitle(result)}
+          key={index}
+          className="display-title"
+        >
+          {result.title}
+        </div>
+      ))}
     </div>
   );
 }
